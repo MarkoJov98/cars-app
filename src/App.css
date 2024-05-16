@@ -1,1 +1,6 @@
-
+.car-info {
+    display: flex;
+    border: 1px solid black;
+    padding: 20px;
+    justify-content: space-between;
+}

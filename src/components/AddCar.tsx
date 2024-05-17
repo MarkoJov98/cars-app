@@ -4,11 +4,8 @@ import carService from "../services/CarService";
 import { Car } from "./AppCars";
 import { useNavigate } from "react-router-dom";
 
-interface AddCarProps {
-    onAddCar: (newCar: Car) => void;
-}
 
-const AddCar: React.FC<AddCarProps> = ( {onAddCar}) => {
+const AddCar: React.FC = ( ) => {
   const [newCar, setNewCar] = useState({
     brand: "",
     model: "",
@@ -28,10 +25,21 @@ const AddCar: React.FC<AddCarProps> = ( {onAddCar}) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const addedCar = await carService.addCar(newCar);
-    onAddCar(addedCar);
+    console.log(addedCar);
     navigate("/cars");
     
   };
+  const handleReset = () => {
+    setNewCar({
+      ...newCar, brand: "",
+      model: "",
+      year: 0,
+      maxSpeed: 0,
+      numberOfDoors: 0,
+      isAutomatic: false,
+      engine: "",
+    })
+  }
 
   const navigate = useNavigate();
   return (
@@ -136,7 +144,8 @@ const AddCar: React.FC<AddCarProps> = ( {onAddCar}) => {
         </div>
       </label>
 
-      <button type="submit">Add Car</button>
+      <button>Add Car</button>
+      <button type="button" onClick={handleReset}>Reset</button>
     </form>
   );
 };

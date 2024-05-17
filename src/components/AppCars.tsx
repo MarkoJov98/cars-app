@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import carService from "../services/CarService";
 import SingleCarComponent from "./SingleCarComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCars } from "../store/cars/selector";
+import { setCars } from "../store/cars/slice";
 
 export interface Car {
   brand: string;
@@ -15,12 +18,13 @@ export interface Car {
 }
 
 const AppCars: React.FC = () => {
-  const [cars, setCars] = useState<Car[]>([]);
+  const dispatch = useDispatch();
+  const cars: Car[] = useSelector(selectCars);
 
   useEffect(() => {
     const fetchCars = async () => {
         const fetchedCars = await carService.getAll();
-        setCars(fetchedCars);
+        dispatch(setCars(fetchedCars));
     }
     fetchCars();
   }, []);

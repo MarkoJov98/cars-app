@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { useState } from "react";
 import carService from "../services/CarService";
-import { Car } from "./AppCars";
 import { useNavigate } from "react-router-dom";
 
 

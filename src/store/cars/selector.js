@@ -5,9 +5,11 @@ export const selectFilteredCars = ({ cars }) => {
 
     const carsList = cars.cars;
     const searched = cars.searchedItem;
-    console.log("trazeno", searched);
+    // console.log("trazeno", searched);
 
     const filtered = carsList.filter((car) => car.brand.toLowerCase().includes(searched) || car.model.toLowerCase().includes(searched));
-    console.log("Filtrirano" , filtered);
+    // console.log("Filtrirano" , filtered);
     return filtered;
 };
+
+export const selectedDeselectedCar = ({ cars }) =>cars.selectedCar.length;

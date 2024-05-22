@@ -24,20 +24,25 @@ const AppCars: React.FC = () => {
 
   useEffect(() => {
     const fetchCars = async () => {
-        const fetchedCars = await carService.getAll();
-        dispatch(setCars(fetchedCars));
-    }
+      const fetchedCars = await carService.getAll();
+      dispatch(setCars(fetchedCars));
+    };
     fetchCars();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
       <h2>Cars</h2>
-      <ul>
-        {cars.map((car) => (
+      {filteredCars.length === 0 ? (
+        <p>No cars found.</p>
+      ) : (
+        <ul>
+          {filteredCars.map((car) => (
             <SingleCarComponent key={car.id} car={car} />
-        ))}
-      </ul>
+          ))}
+        </ul>
+      )}
+      ;
     </div>
   );
 };
